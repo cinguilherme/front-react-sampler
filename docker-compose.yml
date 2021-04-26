@@ -1,0 +1,30 @@
+version: "3"
+
+services: 
+
+    frontend-dev:
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: frontend-dev-pod
+        image: dev-frontend
+        environment: 
+            - CHOKIDAR_USEPOLLING=true
+        ports:
+            - 3000:3000
+        volumes: 
+            - /app/node_modules
+            - C:\Users\cingu\Documents\Codes\Studies\frontend\src:/app/src
+            - C:\Users\cingu\Documents\Codes\Studies\frontend\public:/app/public
+
+    frontend-tests:
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: frontend-tests-pod
+        image: dev-frontend
+        volumes: 
+            - /app/node_modules
+            - C:\Users\cingu\Documents\Codes\Studies\frontend\src:/app/src
+            - C:\Users\cingu\Documents\Codes\Studies\frontend\public:/app/public
+        command: ["npm", "run", "test"]
