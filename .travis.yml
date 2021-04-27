@@ -9,3 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true test-img npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "sa-east-1"
+  app: "cing-frontend-react"
+  env: "Cingfrontendreact-env"
+  bucket_name: "elasticbeanstalk-sa-east-1-838492447918"
+  bucket_path: "cing-frontend-react"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
